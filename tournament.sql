@@ -5,16 +5,22 @@
 --
 -- You can write comments in this file by starting them with two dashes, like
 -- these lines here.
+-- Drop Database if exists
 
+DROP DATABASE IF EXISTS tournament;
+
+-- Drop Tables if exist
+DROP TABLE IF EXISTS players CASCADE;
+DROP TABLE IF EXISTS matches CASCADE;
+
+--Drop view if exists
+DROP VIEW IF EXISTS results CASCADE;
 
 -- Create Database
 CREATE DATABASE tournament;
 
 -- Connect Database
 \c tournament;
-
--- Drop Database if exists
-DROP DATABASE IF EXISTS tournament;
 
 -- Create Players Table
 CREATE TABLE players(
@@ -39,12 +45,7 @@ coalesce((SELECT count(*) FROM matches where players.p_id = matches.winner OR pl
 FROM players LEFT JOIN matches ON playeRS.P_ID = MATCHES.WINNER
 GROUP BY players.p_id ORDER BY winnings DESC;
 
--- Drop Tables if exist
-DROP TABLE IF EXISTS players CASCADE;
-DROP TABLE IF EXISTS matches CASCADE;
 
---Drop view if exists
-DROP VIEW IF EXISTS results CASCADE;
 
 
 
